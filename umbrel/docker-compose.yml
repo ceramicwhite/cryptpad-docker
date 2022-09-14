@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  cryptpad:
+    image: ceramicwhite/cryptpad:v5.0.0@sha256:ccde1a9bfc80050aca06768fd7101c51a0cac1089d4951fba09aca4e732765be
+    restart: on-failure
+    stop_grace_period: 1m
+    init: true
+    user: "1000:1000"
+    environment:
+      - CPAD_CONF=/cryptpad/config/config.js
+      - APP_CONF=/customize/application_config.js
+      - INTERNAL_MAIN_DOMAIN=localhost:3000
+      - HTTP_ADDRESS=0.0.0.0
+    volumes:
+      - ./data/blob:/cryptpad/blob
+      - ./data/block:/cryptpad/block
+      - ./data/customize:/cryptpad/customize
+      - ./data/data:/cryptpad/data
+      - ./data/files:/cryptpad/datastore
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000

@@ -1,0 +1,10 @@
+.dockerignore
+.git
+.gitignore
+.gitmodules
+cryptpad/.git
+customize
+docker-compose.yml
+traefik2.yml
+Dockerfile*
+data
